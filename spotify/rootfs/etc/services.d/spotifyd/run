@@ -8,6 +8,7 @@ declare bitrate
 declare name
 declare password
 declare username
+declare token
 declare autoplay
 declare initial_volume
 
@@ -33,6 +34,11 @@ if bashio::config.has_value 'username'; then
 
     options+=(--username "${username}")
     options+=(--password "${password}")
+fi
+
+if bashio::config.has_value 'token'; then
+    $token=$(bashio::config 'token')
+    options+=(--access-token $token)
 fi
 
 # Autoplay
